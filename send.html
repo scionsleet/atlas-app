@@ -5,7 +5,7 @@
   const names = ['1-home.png','2-entry.png','3-map.png','4-lens.png'];
   const files = [];
   for (const n of names) { const b = await (await fetch('screenshots/' + n)).blob(); files.push(new File([b], n, {type: 'image/png'})); }
-  if (window.opener) window.opener.postMessage({atlasScreenshots: files}, 'https://appstoreconnect.apple.com');
+  (window.opener || window.parent).postMessage({atlasScreenshots: files}, 'https://appstoreconnect.apple.com');
   document.body.textContent = 'Sent ' + files.length + ' screenshots.';
 })();
 </script>
